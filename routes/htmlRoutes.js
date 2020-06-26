@@ -3,4 +3,8 @@ module.exports = function(app, path, db) {
     app.get("/exercise", function(req, res) {
         res.sendFile(path.join(_dirname, "../public/exercise.html"));
     });
+    
+    app.get("/stats", function(req, res) {
+        res.sendFile(path.join(_dirname, "../public/stats.html"));
+    });
 };
