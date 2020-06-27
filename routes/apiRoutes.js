@@ -1,15 +1,35 @@
-module.exports = function (app, path, db) {
+const Workout = require("../models/workout");
+
+module.exports = function (app) {
   //reaches out to the api.js file to get the last logged workout
   app.get("/api/workouts", (req, res) => {
-    db.Workout.find({})
-      .then((workout) => {
-        res.json(workout);
+    db.Workout.find()
+      .then((workoutdata) => {
+        res.json(workoutdata);
       })
       .catch((err) => {
         res.json(err);
       });
   });
 
+  app.get("/api/workouts/range", (req, res) => {
+    db.Workout.find()
+      .then((workoutdata) => {
+        res.json(workoutdata);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+
+  app.post("/api/workouts/range", function (req, res) {
+    Workout.create({})
+      .then((workoutdata) => res.json(workoutdata))
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+  
   //post method creates a new workout in the db
   app.post("/api/workouts", async (req, res) => {
     try {
@@ -49,13 +69,4 @@ module.exports = function (app, path, db) {
     }
   });
 
-  app.get("/api/workouts/range", (req, res) => {
-    db.Workout.find({})
-      .then((workout) => {
-        res.json(workout);
-      })
-      .catch((err) => {
-        res.json(err);
-      });
-  });
 };
